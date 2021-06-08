@@ -1,0 +1,45 @@
+server:
+  port: 8020
+
+spring:
+  profiles:
+    active: dev
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource # 数据源类型：HikariCP
+    driver-class-name: com.mysql.jdbc.Driver # mysql驱动
+  hikari:
+    connection-timeout: 30000 # 等待连接池分配连接的最大时长（毫秒），超过这个时长还没可用的连接则发生SQL错误
+    minimum-idle: 5 # 最小连接数
+    maximum-pool-size: 20 # 最大连接数
+    auto-commit: true # 自动提交
+    idle-timeout: 30000 # 连接超时的最大时长（毫秒），超时则被释放（retired），默认:10分钟
+    pool-name: DateSourceHikariCP # 连接池名字
+    max-lifetime: 20000 # 连接的生命时长（毫秒），超时而且没被使用则被释放（retired），默认:30分钟
+    connection-test-query: SELECT 1
+  servlet:
+    multipart:
+      max-file-size: 5120000
+      max-request-size: 5120000
+  thymeleaf:
+    mode: HTML
+    encoding: utf-8
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+  application:
+    name: open-admin
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+pagehelper:
+  helperDialect: mysql
+  supportMethodsArguments: true
+
+mybatis:
+  type-aliases-package: com.cxp.openadmin.domain.entity # 所有POJO类所在包路径
+  mapper-locations: classpath*:com.cxp.openadmin.dao/**/*.xml
+
+jwt:
+  secret: cxp
+  expire-time-in-second: 1209600

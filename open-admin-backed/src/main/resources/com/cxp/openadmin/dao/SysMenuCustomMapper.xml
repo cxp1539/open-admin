@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cxp.openadmin.dao.SysMenuCustomMapper">
+
+  <resultMap id="BaseResultMap" type="com.cxp.openadmin.domain.entity.SysMenu">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="invisible" jdbcType="BIT" property="invisible" />
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="cache_able" jdbcType="BIT" property="cacheAble" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="component" jdbcType="VARCHAR" property="component" />
+    <result column="permissions" jdbcType="VARCHAR" property="permissions" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+  </resultMap>
+
+  <select id="findMenuByIds" resultMap="BaseResultMap">
+    SELECT * FROM sys_menu WHERE id in
+    <foreach collection="ids" item="id" index="index" open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+  </select>
+
+</mapper>

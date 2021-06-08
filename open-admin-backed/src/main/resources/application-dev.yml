@@ -1,0 +1,24 @@
+server:
+  port: 8020
+
+spring:
+  datasource:
+    url: jdbc:mysql://116.63.145.108:3306/open_admin?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&autoReconnect&useSSL=false
+    username: root
+    password: 9bee4a941bd1e791
+
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开始sql打印
+
+resource:
+  upload-location: D:\\uploads\\open_admin
+  server-url: http://localhost:8020/static/open_admin
+
+wx:
+  mini-app:
+    appId: wx2f9338a8bc87bdd6
+    appSecret: 0bc6210cbe6fe70cdd244867fb338dca
+
+server-url: http://localhost:8020
+

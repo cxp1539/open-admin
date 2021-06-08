@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cxp.openadmin.dao.SysRoleMenuPermissionCustomMapper">
+
+    <select id="getRoleMenuPermissons" resultType="com.cxp.openadmin.domain.vo.backed.SysRoleMenuPermissionVo" parameterType="Map">
+        SELECT m.component, p.operation FROM sys_role_menu_permission p LEFT JOIN sys_menu m on p.menu_id = m.id where p.role_id = #{paramsMap.roleId};
+    </select>
+
+</mapper>
