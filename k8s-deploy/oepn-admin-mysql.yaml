@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql57
+spec:
+  ports:
+  - port: 3306
+    name: mysql57
+    nodePort: 30306
+  type: NodePort
+  selector:
+    run: mysql57
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql57
+spec:
+  selector:
+    matchLabels:
+      run: mysql57
+  serviceName: "mysql57"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: mysql57
+    spec:
+      containers:
+      - name: mysql57
+        image: mysql:5.7
+        ports:
+        - containerPort: 3306
+          name: mysql
+        volumeMounts:
+        - name: mysql-data-path
+          mountPath: /var/lib/mysql
+        - name: mysql-conf-path
+          mountPath: /etc/my.cnf
+        - name: mysql-init-path
+          mountPath: /docker-entrypoint-initdb.d
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            value: "root"
+      volumes:
+        - name: mysql-data-path
+          hostPath:
+              path: /root/mysql/data
+              type: DirectoryOrCreate
+        - name: mysql-conf-path
+          hostPath:
+              path: /root/mysql/conf/my.cnf
+        - name: mysql-init-path
+          hostPath:
+              path: /root/mysql/init
+

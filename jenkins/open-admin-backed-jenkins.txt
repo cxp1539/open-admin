@@ -1,0 +1,62 @@
+pipeline {
+	agent any
+
+	stages {
+		stage('gitlab clone') {
+			steps {
+				echo "gitlab clone...${TEST}..."
+				git credentialsId: 'cdafea1b-dfbd-4063-ad8c-9e55393bb918', url: 'http://www.docker.com/root/open-admin-backed.git'
+			
+			}
+		}
+
+
+		stage('gitlab package') {
+			steps {
+				echo 'mvn package'
+				sh '''
+					mvn clean package -DskipTests				
+				'''
+			}
+		}
+
+
+		stage('build docker image'){
+
+			steps {
+
+				echo 'build docker image'
+
+	            sh '''
+
+	            	docker build -t 192.168.1.100:8082/l-docker/open-admin-backed:\$BUILD_NUMBER .
+					docker push 192.168.1.100:8082/l-docker/open-admin-backed:\$BUILD_NUMBER
+
+	            	docker build -t 192.168.1.100:8082/l-docker/open-admin-backed:latest .
+					docker push 192.168.1.100:8082/l-docker/open-admin-backed:latest
+
+	            '''
+				
+				echo 'build docker image end...'
+
+ 			}
+
+        }
+        
+       stage('k8s deploy'){
+
+			steps {
+
+				echo 'k8s deploy'
+                sh '''
+                    kubectl set image deploy open-admin-backed-deployment open-admin-backed=192.168.1.100:8082/l-docker/open-admin-backed:\$BUILD_NUMBER -n ${env}
+                '''
+				echo 'k8s deploy end...'
+
+ 			}
+
+        }
+        
+
+	}
+}

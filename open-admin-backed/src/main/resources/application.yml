@@ -3,7 +3,7 @@ server:
 
 spring:
   profiles:
-    active: dev
+    active: ${PROCESS_ENV:dev}
   datasource:
     type: com.zaxxer.hikari.HikariDataSource # 数据源类型：HikariCP
     driver-class-name: com.mysql.jdbc.Driver # mysql驱动

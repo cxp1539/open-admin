@@ -15,7 +15,7 @@
           v-show="error"
           :message="error"
           showIcon
-          style="margin-bottom: 24px;"
+          style="margin-bottom: 24px"
         />
         <a-form-item>
           <a-input
@@ -55,13 +55,24 @@
 
         <a-form-item>
           <a-input
-            style="width:230px;margin-right:20px;cursor:pointer;"
+            style="width: 230px; margin-right: 20px; cursor: pointer"
             size="large"
             autocomplete="false"
             placeholder="请输入验证码"
-            v-decorator="['code', { rules: [{ required: true, message: '请输入验证码' }], validateTrigger: 'blur' }]"
+            v-decorator="[
+              'code',
+              {
+                rules: [{ required: true, message: '请输入验证码' }],
+                validateTrigger: 'blur',
+              },
+            ]"
           />
-          <img style="display: inline-block;" :src="verCode" class="verCode" @click="newVerCode" />
+          <img
+            style="display: inline-block"
+            :src="verCode"
+            class="verCode"
+            @click="newVerCode"
+          />
         </a-form-item>
 
         <div>
@@ -70,11 +81,12 @@
         <a-form-item>
           <a-button
             :loading="logging"
-            style="width: 100%;margin-top: 24px"
+            style="width: 100%; margin-top: 24px"
             size="large"
             htmlType="submit"
             type="primary"
-          >登录</a-button>
+            >登录</a-button
+          >
         </a-form-item>
 
         <!-- <div>
@@ -93,7 +105,6 @@ import { login } from "@/services/system";
 import { setAuthorization } from "@/utils/request";
 import { mapMutations } from "vuex";
 import { mapState } from "vuex";
-import { againBootstrap } from "@/utils/util";
 export default {
   name: "Login",
   components: { CommonLayout },
@@ -102,19 +113,24 @@ export default {
       logging: false,
       error: "",
       form: this.$form.createForm(this),
-      verCode: ""
+      verCode: "",
     };
   },
   computed: {
     systemName() {
       return this.$store.state.setting.systemName;
-    }
+    },
   },
   created() {
     this.newVerCode();
   },
   methods: {
-    ...mapMutations("account", ["setUser", "setPermissions", "setRole", "setMenus"]),
+    ...mapMutations("account", [
+      "setUser",
+      "setPermissions",
+      "setRole",
+      "setMenus",
+    ]),
     newVerCode() {
       this.verCode =
         process.env.VUE_APP_API_BASE_URL +
@@ -124,7 +140,7 @@ export default {
     },
     onSubmit(e) {
       e.preventDefault();
-      this.form.validateFields(err => {
+      this.form.validateFields((err) => {
         if (!err) {
           this.logging = true;
           const username = this.form.getFieldValue("username");
@@ -134,11 +150,11 @@ export default {
         }
       });
     },
-    translatePermission(permissions){
-      return permissions.map(item => {
+    translatePermission(permissions) {
+      return permissions.map((item) => {
         return {
           operation: JSON.parse(item.operation),
-          component: item.component
+          component: item.component,
         };
       });
     },
@@ -153,16 +169,14 @@ export default {
         this.setRole(user.role);
         setAuthorization({
           token: loginRes.data.token,
-          expireAt: new Date(loginRes.data.tokenExpireAt)
+          expireAt: new Date(loginRes.data.tokenExpireAt),
         });
-        againBootstrap(true);
-        // 获取路由配置
-        this.$router.push("/workplace");
+        window.location.reload();
       } else {
         this.error = loginRes.message;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

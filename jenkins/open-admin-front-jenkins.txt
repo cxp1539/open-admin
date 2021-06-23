@@ -1,0 +1,54 @@
+pipeline {
+    agent any
+
+	stages {
+	    
+		stage('gitlab clone') {
+			steps {
+				echo "gitlab clone...${ENVIRONMENT}..."
+				git credentialsId: 'cdafea1b-dfbd-4063-ad8c-9e55393bb918', url: 'http://www.docker.com/root/open-admin-front.git'
+			}
+		}
+
+
+ 		stage('gitlab package') {
+ 			steps {
+	            echo "Performing npm build..."
+ 	            sh 'npm config set registry https://registry.npm.taobao.org'
+ 	            sh 'npm install && npm run build'
+ 			}
+ 		}
+
+
+		stage('build docker image'){
+			steps {
+				echo 'build docker image'
+	            sh '''
+	            	docker build -t 192.168.1.100:8082/l-docker/open-admin-front:\$BUILD_NUMBER .
+					docker push 192.168.1.100:8082/l-docker/open-admin-front:\$BUILD_NUMBER
+
+	            	docker build -t 192.168.1.100:8082/l-docker/open-admin-front:latest .
+					docker push 192.168.1.100:8082/l-docker/open-admin-front:latest
+
+	            '''
+				echo 'build docker image end...'
+ 			}
+        }
+
+
+        stage('k8s deploy'){
+
+			steps {
+
+				echo 'k8s deploy'
+                sh '''
+                    kubectl set image deploy open-admin-front-deployment open-admin-front=192.168.1.100:8082/l-docker/open-admin-front:\$BUILD_NUMBER -n ${env}
+                '''
+				echo 'k8s deploy end...'
+
+ 			}
+
+        }
+
+	}
+}

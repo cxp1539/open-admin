@@ -1,9 +1,17 @@
-import { hasAuthority } from "@/utils/authority-utils";
-import { loginIgnore } from "@/router/index";
-import { checkAuthorization } from "@/utils/request";
+import {
+  hasAuthority
+} from "@/utils/authority-utils";
+import {
+  loginIgnore
+} from "@/router/index";
+import {
+  checkAuthorization
+} from "@/utils/request";
 import NProgress from "nprogress";
 
-NProgress.configure({ showSpinner: false });
+NProgress.configure({
+  showSpinner: false
+});
 
 /**
  * 进度条开始
@@ -28,7 +36,13 @@ const progressStart = (to, from, next) => {
  */
 const loginGuard = (to, from, next, options) => {
   if (!loginIgnore.includes(to) && !checkAuthorization()) {
-    next({ path: "/login" });
+    next({
+      path: "/login"
+    });
+  } else if (checkAuthorization() && to.path == '/login') {
+    next({
+      path: "/"
+    });
   } else {
     next();
   }
@@ -42,11 +56,16 @@ const loginGuard = (to, from, next, options) => {
  * @param options
  */
 const authorityGuard = (to, from, next, options) => {
-  const { store, message } = options;
+  const {
+    store,
+    message
+  } = options;
   const role = store.getters["account/role"];
   if (!hasAuthority(to, role)) {
     message.warning(`对不起，您无权访问页面: ${to.fullPath}，请联系管理员`);
-    next({ path: "/403" });
+    next({
+      path: "/403"
+    });
     // NProgress.done()
   } else {
     next();
@@ -62,7 +81,9 @@ const authorityGuard = (to, from, next, options) => {
  * @returns {*}
  */
 const redirectGuard = (to, from, next, options) => {
-  const { store } = options;
+  const {
+    store
+  } = options;
   const getFirstChild = (routes) => {
     const route = routes[0];
     if (!route.children || route.children.length === 0) {
@@ -77,7 +98,9 @@ const redirectGuard = (to, from, next, options) => {
       const subMenu = store.getters["setting/subMenu"];
       if (subMenu.length > 0) {
         const redirect = getFirstChild(subMenu);
-        return next({ path: redirect.fullPath });
+        return next({
+          path: redirect.fullPath
+        });
       }
     }
   }

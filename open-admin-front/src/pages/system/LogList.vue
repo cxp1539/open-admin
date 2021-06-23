@@ -1,5 +1,5 @@
 <template>
-  <a-card :bordered="false" :style="{minHeight: '592px'}">
+  <a-card :bordered="false" :style="{ minHeight: '560px' }">
     <div class="table-page-search-wrapper">
       <a-form layout="inline">
         <a-row :gutter="48">
@@ -14,16 +14,17 @@
                 <a-select-option value>所有</a-select-option>
                 <a-select-option
                   :key="index"
-                  v-for="(item,index) in sysUserList"
+                  v-for="(item, index) in sysUserList"
                   :value="item.id"
-                >{{ item.name }}</a-select-option>
+                  >{{ item.name }}</a-select-option
+                >
               </a-select>
             </a-form-item>
           </a-col>
 
           <a-col :md="14" :sm="24">
             <a-form-item label="审核时间">
-              <a-form-item :style="{ display: 'inline-block'}">
+              <a-form-item :style="{ display: 'inline-block' }">
                 <a-date-picker
                   :format="dateFormat"
                   @change="change"
@@ -31,8 +32,17 @@
                   style="width: 100%"
                 />
               </a-form-item>
-              <span :style="{ display: 'inline-block', width: '24px', textAlign: 'center' }">-</span>
-              <a-form-item :style="{ display: 'inline-block', width: 'calc(50% - 12px)' }">
+              <span
+                :style="{
+                  display: 'inline-block',
+                  width: '24px',
+                  textAlign: 'center',
+                }"
+                >-</span
+              >
+              <a-form-item
+                :style="{ display: 'inline-block', width: 'calc(50% - 12px)' }"
+              >
                 <a-date-picker
                   :format="dateFormat"
                   @change="change"
@@ -55,7 +65,9 @@
       :pageURI="true"
       :queryParam="queryParam"
     >
-      <span slot="operationId" slot-scope="operationId">{{ getOpertationName(operationId) }}</span>
+      <span slot="operationId" slot-scope="operationId">{{
+        getOpertationName(operationId)
+      }}</span>
 
       <span slot="url" slot-scope="url">
         <a-tag>{{ url }}</a-tag>
@@ -80,7 +92,7 @@ import { getSysUserList, getLogList } from "@/services/system";
 export default {
   name: "LogList",
   components: {
-    STable
+    STable,
   },
   data() {
     return {
@@ -90,11 +102,11 @@ export default {
       visible: false,
       labelCol: {
         xs: { span: 24 },
-        sm: { span: 5 }
+        sm: { span: 5 },
       },
       wrapperCol: {
         xs: { span: 24 },
-        sm: { span: 16 }
+        sm: { span: 16 },
       },
       sysUserList: [],
       dateFormat: "YYYY-MM-DD",
@@ -102,49 +114,49 @@ export default {
       columns: [
         {
           title: "Id",
-          dataIndex: "id"
+          dataIndex: "id",
         },
         {
           title: "操作人",
           dataIndex: "operationId",
-          scopedSlots: { customRender: "operationId" }
+          scopedSlots: { customRender: "operationId" },
         },
         {
           title: "请求url",
           dataIndex: "url",
-          scopedSlots: { customRender: "url" }
+          scopedSlots: { customRender: "url" },
         },
         {
           title: "请求ip",
-          dataIndex: "ip"
+          dataIndex: "ip",
         },
         {
           title: "请求浏览器",
-          dataIndex: "browser"
+          dataIndex: "browser",
         },
         {
           title: "请求参数",
           dataIndex: "params",
           width: 380,
-          scopedSlots: { customRender: "params" }
+          scopedSlots: { customRender: "params" },
         },
         {
           title: "执行时长(ms)",
-          dataIndex: "takeTime"
+          dataIndex: "takeTime",
         },
         {
           title: "请求时间",
           dataIndex: "createdTime",
-          key: "createdTime"
-        }
+          key: "createdTime",
+        },
       ],
-      loadData: parameter => {
+      loadData: (parameter) => {
         return getLogList(Object.assign(this.queryParam, parameter)).then(
-          res => {
+          (res) => {
             return res.data;
           }
         );
-      }
+      },
     };
   },
   created() {
@@ -157,19 +169,19 @@ export default {
       } else {
         return text;
       }
-    }
+    },
   },
   methods: {
     change() {
       this.$refs.list.refresh();
     },
     getSysUserList() {
-      getSysUserList().then(res => {
+      getSysUserList().then((res) => {
         this.sysUserList = res.data;
       });
     },
     getOpertationName(operationId) {
-      let res = this.sysUserList.find(item => {
+      let res = this.sysUserList.find((item) => {
         return item.id == operationId;
       });
       if (res) {
@@ -177,7 +189,7 @@ export default {
       } else {
         return "";
       }
-    }
-  }
+    },
+  },
 };
 </script>

@@ -11,4 +11,11 @@ public class Md5Util {
         String newStr = Base64.encodeBase64String(md5.digest(strValue.getBytes()));
         return newStr;
     }
+
+    public static void main(String[] args) throws NoSuchAlgorithmException {
+        System.out.println(getMd5Str("admin"));
+
+    }
+
+
 }

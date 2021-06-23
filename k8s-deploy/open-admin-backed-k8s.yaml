@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: open-admin-backed-service
+spec:
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8030
+      nodePort: 30557
+  selector:
+    run: open-admin-backed
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: open-admin-backed-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      run: open-admin-backed
+  template:
+    metadata:
+      labels:
+        run: open-admin-backed
+    spec:
+      containers:
+        - name: open-admin-backed
+          image: 192.168.1.100:8082/l-docker/open-admin-backed:latest
+          env: 
+            - name: PROCESS_ENV
+              value: "prod"
+            - name: MYSQL_HOST
+              value: "116.63.145.108"
+            - name: MYSQL_PORT
+              value: "3306"
+            - name: MYSQL_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: open-admin-backed-secret
+                  key: username
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: open-admin-backed-secret
+                  key: password
+          ports:
+            - containerPort: 8030
+
+
+

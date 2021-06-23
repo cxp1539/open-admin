@@ -11,8 +11,10 @@ public class SysMenuVo implements TreeEntity<SysMenuVo>{
     public String path;
     public Integer invisible;
     public String icon;
+    private Integer sort;
     public Integer cacheAble;
     public String component;
     public Integer parentId;
+    public String permissions;
     public List<SysMenuVo> children;
 }

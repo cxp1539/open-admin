@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+
+  mysql:
+    image: mysql:5.7
+    restart: always
+    ports:
+      - "30306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - "/root/mysql/data:/var/lib/mysql"
+      - "/root/mysql/conf/my.cnf:/etc/my.cnf"
+      - "/root/mysql/init:/docker-entrypoint-initdb.d"
+    networks:
+      - open-admin
+
+  open-admin-front:
+    image: 192.168.1.100:8082/l-docker/open-admin-front:latest
+    ports:
+      - "32557:80"
+    networks:
+      - open-admin
+      
+  open-admin-backed:
+    image: 192.168.1.100:8082/l-docker/open-admin-backed:latest
+    links:
+     - mysql
+    ports:
+     - "30557:8020"
+    environment:
+      PROCESS_ENV: "dev"
+      MYSQL_HOST: "192.168.1.100"
+      MYSQL_PORT: "30306"
+      MYSQL_USERNAME: "root"
+      MYSQL_PASSWORD: "root"
+    networks:
+      - open-admin
+
+networks:
+  open-admin:
+    driver: bridge

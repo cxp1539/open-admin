@@ -1,7 +1,12 @@
 import Vue from "vue";
 import Router from "vue-router";
-import { formatRoutes, getRouters } from "@/utils/routerUtil";
-import { commonRoutes } from "./config";
+import {
+  formatRoutes,
+  getRouters
+} from "@/utils/routerUtil";
+import {
+  commonRoutes
+} from "./config";
 
 const originalPush = Router.prototype.push;
 Router.prototype.push = function push(location) {
@@ -39,4 +44,7 @@ function initRouter(isAuth) {
   formatRoutes(options.routes);
   return new Router(options);
 }
-export { loginIgnore, initRouter };
+export {
+  loginIgnore,
+  initRouter
+};
