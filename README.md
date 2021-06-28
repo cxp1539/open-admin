@@ -4,7 +4,7 @@ Open Admin是基于 Spring Boot + Spring Security + Mybatis + Vue Antd Admin Pro
 
 Open Admin 的开发借鉴了很多优秀的开源项目，应用案例等等，并将他们纳入项目中，比如前端是基于`iczer / vue-antd-admin`开发，结合自己的思想和开发经验，对框架完成了一次重构。
 
-## 选择他的理由
+## 选择它的理由
 
 
 - 使用简单
