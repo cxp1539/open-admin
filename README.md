@@ -147,4 +147,7 @@ kubectl apply -f heapster/
 kubectl delete -f heapster/
 ```
 
+## License
+
+[MIT](https://github.com/cxp1539/open-admin/blob/main/LICENSE)
 
