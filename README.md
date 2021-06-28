@@ -77,7 +77,7 @@ docker service start
 
 ```
 
-分别切换到 open-admin-backed、 open-admin-front项目目录，基于Dockerfile打包成镜像，推送到私有镜像上。
+`artifactory-jcr` 启动以后，分别切换到 open-admin-backed、 open-admin-front项目下 基于 `Dockerfile` 打包成镜像，进而推送到私有镜像上
 
 ```bash
 docker build -t 192.168.1.100:8082/l-docker/open-admin-backed:latest .
