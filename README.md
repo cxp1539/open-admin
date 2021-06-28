@@ -1,4 +1,4 @@
-## 项目介绍:
+## 项目介绍
 
 Open Admin是基于 Spring Boot + Spring Security + Mybatis + Vue Antd Admin Pro + Mysql开发的框架，致力于为用户生成定制的前后端脚手架框架，系统集成了同步菜单、异步菜单、RBAC、 菜单权限、日志管理、Excel导出、国际化等常用功能，并且基于gitlab、jenkins、 Docker、 Kubernetes实现了Devops构建流程，使开发专注于业务逻辑。 能够有效降低开发成本，提升开发效率。
 
@@ -38,26 +38,18 @@ Open Admin 的开发借鉴了很多优秀的开源项目，应用案例等等，
 
 http://116.63.145.108:8030/
 
-admin  111111
-
+admin/111111
 
 ## 快速开始
 
-### 同步菜单、异步菜单
-
-main.js
-
-异步菜单
-const router = initRouter(false, checkAuthorization() ? true : false);
-
-同步菜单
-const router = initRouter(true，, checkAuthorization() ? true : false);
+~ open-admin 集成了 同步菜单、异步菜单，默认使用异步菜单，菜单数据由后端接口提供，如果系统不需要自定义菜单权限，可以改成同步菜单，菜单由前端配置。 修改方式 
+编辑 open-admin-front main.js 文件 将 initRouter 方法 第一个参数 改为 true 即可。
 
 ### 本地开发
 
 #### open-admin-backed
 
-修改application-env.yml mysql连接信息
+~ 修改application-env.yml mysql连接信息
 
 ```bash
 mvn clean package -DskipTests
@@ -67,19 +59,19 @@ java -jar open-admin-0.0.1-SNAPSHOT.jar
 
 #### open-admin-front
 
-修改.env VUE_APP_API_BASE_URL连接信息
+~ 修改.env VUE_APP_API_BASE_URL 连接信息
 
 ```bash
 npm install 
 npm run dev
 ```
 
-### docker image
+### Docker 私有镜像
+
+~ open-admin 采用 artifactory-jcr 搭建私有仓库镜像，以下是操作命令：
 
 ```bash
-docker artifactory-jcr
 docker run --name artifactory-jcr -d -v data_artifactory:/var/opt/jfrog/artifactory -p 8082:8082 -p 8083:8083 docker.bintray.io/jfrog/artifactory-jcr:latest
-docker service stop
 vim /lib/systemd/system/docker.service 
 ExecStart=/usr/bin/dockerd --insecure-registry 192.168.1.100:8082
 docker service start
@@ -92,10 +84,9 @@ docker push 192.168.1.100:8082/l-docker/open-admin-front:latest
 
 ### 测试环境
 
-### docker-compose
+~ 测试环境可以使用 docker-compose 方式部署，docker-compose.yaml 在 compose 目录下，切换到该目录下 运行一下命令即可。
 
 ```bash
-docker-compose
 docker-compose -f open-admin-compose.yaml up -d
 docker-compose -f open-admin-compose.yaml down
 ```
@@ -103,10 +94,12 @@ docker-compose -f open-admin-compose.yaml down
 
 ### 生产环境
 
-### k8s
+~ 生产环境建议使用 kubernetes 方式部署，kubernetes.yaml 在 kubernetes 目录下，切换到该目录下 运行以下命令即可。
 
 ```bash
-# echo -n 'xxxxxxxxxxxxxxxx' | base64
+# 生成 mysql password
+echo -n 'xxxxxxxxxxxxxxxx' | base64
+# 创建生产环境命令空间
 kubectl create namespace prod
 kubectl apply -f k8s-deploy/
 kubectl delete -f k8s-deploy/
@@ -114,8 +107,7 @@ kubectl delete -f k8s-deploy/
 
 ## CI/CD
 
-
-### jenkins
+~ CI/CD 通过 jenkins, gitlab 方式构建，jenkins pipline 在 jenkins jenkins-pipline 目录下，可以基于该配置进行自定义扩展， 以下是jenkins, gitlab安装方式和配置信息
 
 ```bash
 vim /etc/sysconfig/jenkins
@@ -130,15 +122,10 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown 997:993 /var/lib/jenkins/.kube/config
 ```
 
-
-### docker gitlab
-
 ```bash
 docker run -d  -p 443:443 -p 80:80 -p 2222:22 --name gitlab --restart always -v /home/gitlab/config:/etc/gitlab -v /home/gitlab/logs:/var/log/gitlab -v /home/gitlab/data:/var/opt/gitlab gitlab/gitlab-ce
 
-
 vim /home/gitlab/config/gitlab.rb
-
 external_url 'http://www.docker.com'
  
 # 配置ssh协议所使用的访问地址和端口
@@ -149,6 +136,8 @@ docker restart gitlab
 ```
 
 ## 运维监控
+
+~ 运维监控通过dashboard、heapster方式，heapster方式 yml 文件 heapster 目录下，切换到该目录下，运行一下命令即可
 
 ```bash
 kubectl apply -f heapster/
