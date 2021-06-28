@@ -13,7 +13,7 @@ Open Admin 的开发借鉴了很多优秀的开源项目，应用案例等等，
 
 - 页面好看
 
-秉承 Ant Design 的 设计价值观，延用 Ant Design 的 设计原则 , UI简洁美观。
+秉承 Ant Design 的 设计价值观，延用 Ant Design 的设计原则 , UI简洁美观。
 
 - 前后端分离架构，企业级权限管理
 
@@ -68,7 +68,7 @@ npm run dev
 
 ### Docker 私有镜像
 
-open-admin 采用 artifactory-jcr 搭建私有仓库镜像，以下是artifactory-jcr docker方式安装命令
+open-admin 采用 `artifactory-jcr` 搭建私有仓库镜像，以下是artifactory-jcr docker方式安装命令
 
 ```bash
 docker run --name artifactory-jcr -d -v data_artifactory:/var/opt/jfrog/artifactory -p 8082:8082 -p 8083:8083 docker.bintray.io/jfrog/artifactory-jcr:latest
@@ -84,7 +84,7 @@ docker push 192.168.1.100:8082/l-docker/open-admin-front:latest
 
 ### 测试环境
 
-测试环境可以使用 docker-compose 方式部署，mysql初始化命令在 docker-mysql 目录下，docker-compose.yaml 在 docker-compose 目录下，切换到该目录下 修改open-admin-compose.yaml 文件中 mysql配置目录 运行以下命令即可
+测试环境可以使用 `docker-compose` 方式部署，mysql初始化命令在 docker-mysql 目录下，docker-compose.yaml 在 docker-compose 目录下，切换到该目录下 修改open-admin-compose.yaml 文件中 mysql配置目录 运行以下命令即可
 
 ```bash
 docker-compose -f open-admin-compose.yaml up -d
@@ -94,7 +94,7 @@ docker-compose -f open-admin-compose.yaml down
 
 ### 生产环境
 
-生产环境建议使用 kubernetes 方式部署，mysql 密码使用kubernetes secret 方式保存，可以通过 echo -n 'xxxxxxxxxxxxxxxx' | base64 生成， kubernetes.yaml 在 kubernetes 目录下，切换到该目录下 运行以下命令即可
+生产环境建议使用 `kubernetes` 方式部署，mysql 密码使用kubernetes secret 方式保存，可以通过 echo -n 'xxxxxxxxxxxxxxxx' | base64 生成， kubernetes.yaml 在 kubernetes 目录下，切换到该目录下 运行以下命令即可
 
 ```bash
 # 创建生产环境命令空间
@@ -105,7 +105,7 @@ kubectl delete -f k8s-deploy/
 
 ## CI/CD
 
-CI/CD 通过 jenkins, gitlab 方式构建，jenkins pipline 配置信息 在 jenkins-pipline 目录下，可以基于该配置进行自定义扩展， 以下是jenkins, gitlab安装方式和配置信息
+CI/CD 通过 jenkins，gitlab 方式构建，jenkins pipline 配置信息 在 jenkins-pipline 目录下，可以基于该配置进行自定义扩展， 以下是jenkins, gitlab安装方式和配置信息
 
 ```bash
 vim /etc/sysconfig/jenkins
