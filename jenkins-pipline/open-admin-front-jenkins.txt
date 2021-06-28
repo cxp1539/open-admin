@@ -6,7 +6,7 @@ pipeline {
 		stage('gitlab clone') {
 			steps {
 				echo "gitlab clone...${ENVIRONMENT}..."
-				git credentialsId: 'cdafea1b-dfbd-4063-ad8c-9e55393bb918', url: 'http://www.docker.com/root/open-admin-front.git'
+				git credentialsId: 'cdafea1b-dfbd-4063-ad8c-9e55393bb918', url: 'http://www.gitlab.com/root/open-admin-front.git'
 			}
 		}
 
