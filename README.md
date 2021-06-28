@@ -1,6 +1,6 @@
 ## 项目介绍
 
-Open Admin是基于 Spring Boot + Spring Security + Mybatis + Vue Antd Admin Pro + Mysql开发的框架，致力于为用户生成定制的前后端脚手架框架，系统集成了同步菜单、异步菜单、RBAC、 菜单权限、日志管理、Excel导出、国际化等常用功能，并且基于gitlab、jenkins、 Docker、 Kubernetes实现了Devops构建流程，使开发专注于业务逻辑。 能够有效降低开发成本，提升开发效率。
+Open Admin是基于 Spring Boot + Spring Security + Mybatis + Vue Antd Admin Pro + Mysql开发的框架，致力于为用户生成定制的前后端脚手架框架，系统集成了同步菜单、异步菜单、RBAC、 菜单权限、日志管理、Excel导出、国际化等常用功能，并且基于Gitlab、Jenkins、 Docker、 Kubernetes实现了Devops构建流程，使开发专注于业务逻辑。 能够有效降低开发成本，提升开发效率。
 
 Open Admin 的开发借鉴了很多优秀的开源项目，应用案例等等，并将他们纳入项目中，比如前端是基于`iczer / vue-antd-admin`开发，结合自己的思想和开发经验，对框架完成了一次重构。
 
