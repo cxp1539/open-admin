@@ -42,14 +42,14 @@ admin/111111
 
 ## 快速开始
 
-~ open-admin 集成了 同步菜单、异步菜单，默认使用异步菜单，菜单数据由后端接口提供，如果系统不需要自定义菜单权限，可以改成同步菜单，菜单由前端配置。 修改方式 
+open-admin 集成了 同步菜单、异步菜单，默认使用异步菜单，菜单数据由后端接口提供，如果系统不需要自定义菜单权限，可以改成同步菜单，菜单由前端配置。 修改方式 
 编辑 open-admin-front main.js 文件 将 initRouter 方法 第一个参数 改为 true 即可。
 
 ### 本地开发
 
 #### open-admin-backed
 
-~ 修改application-env.yml mysql连接信息
+修改application-env.yml mysql连接信息
 
 ```bash
 mvn clean package -DskipTests
@@ -59,7 +59,7 @@ java -jar open-admin-0.0.1-SNAPSHOT.jar
 
 #### open-admin-front
 
-~ 修改.env VUE_APP_API_BASE_URL 连接信息
+修改.env VUE_APP_API_BASE_URL 连接信息
 
 ```bash
 npm install 
@@ -68,7 +68,7 @@ npm run dev
 
 ### Docker 私有镜像
 
-~ open-admin 采用 artifactory-jcr 搭建私有仓库镜像，以下是操作命令：
+open-admin 采用 artifactory-jcr 搭建私有仓库镜像，以下是操作命令：
 
 ```bash
 docker run --name artifactory-jcr -d -v data_artifactory:/var/opt/jfrog/artifactory -p 8082:8082 -p 8083:8083 docker.bintray.io/jfrog/artifactory-jcr:latest
@@ -84,7 +84,7 @@ docker push 192.168.1.100:8082/l-docker/open-admin-front:latest
 
 ### 测试环境
 
-~ 测试环境可以使用 docker-compose 方式部署，docker-compose.yaml 在 compose 目录下，切换到该目录下 运行一下命令即可。
+测试环境可以使用 docker-compose 方式部署，docker-compose.yaml 在 compose 目录下，切换到该目录下 运行一下命令即可。
 
 ```bash
 docker-compose -f open-admin-compose.yaml up -d
@@ -94,7 +94,7 @@ docker-compose -f open-admin-compose.yaml down
 
 ### 生产环境
 
-~ 生产环境建议使用 kubernetes 方式部署，kubernetes.yaml 在 kubernetes 目录下，切换到该目录下 运行以下命令即可。
+生产环境建议使用 kubernetes 方式部署，kubernetes.yaml 在 kubernetes 目录下，切换到该目录下 运行以下命令即可。
 
 ```bash
 # 生成 mysql password
@@ -107,7 +107,7 @@ kubectl delete -f k8s-deploy/
 
 ## CI/CD
 
-~ CI/CD 通过 jenkins, gitlab 方式构建，jenkins pipline 在 jenkins jenkins-pipline 目录下，可以基于该配置进行自定义扩展， 以下是jenkins, gitlab安装方式和配置信息
+CI/CD 通过 jenkins, gitlab 方式构建，jenkins pipline 在 jenkins jenkins-pipline 目录下，可以基于该配置进行自定义扩展， 以下是jenkins, gitlab安装方式和配置信息
 
 ```bash
 vim /etc/sysconfig/jenkins
@@ -137,7 +137,7 @@ docker restart gitlab
 
 ## 运维监控
 
-~ 运维监控通过dashboard、heapster方式，heapster方式 yml 文件 heapster 目录下，切换到该目录下，运行一下命令即可
+运维监控通过dashboard、heapster方式，heapster方式 yml 文件 heapster 目录下，切换到该目录下，运行一下命令即可
 
 ```bash
 kubectl apply -f heapster/
