@@ -24,7 +24,7 @@ Open Admin 的开发借鉴了很多优秀的开源项目，应用案例等等，
 前后端采用目前最流行的技术框架开发，基础功能完善，可基于Kubernetes + Docker + Jenkins 实现 Devops 构建流程。
 
 
-## 项目图
+## 项目截图
 
 ![dcfd08fd26ba34ed14956f00e425b57](https://user-images.githubusercontent.com/45785238/123389408-6d603b80-d5cc-11eb-80be-871abf2eadb7.png)
 ![ae07a408176b9dca9075a55d568552b](https://user-images.githubusercontent.com/45785238/123389431-74874980-d5cc-11eb-9462-2fc00926337d.png)
