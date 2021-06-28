@@ -17,11 +17,11 @@ Open Admin 的开发借鉴了很多优秀的开源项目，应用案例等等，
 
 - 前后端分离架构，企业级权限管理
 
-基于JWT Token方案，实现前后端分离，完善的功能权限可控制到按钮粒度级别。
+基于 JWT Token 方案，实现前后端分离，完善的功能权限可控制到按钮粒度级别。
 
 - 企业成熟的解决方案
 
-前后端采用目前最流行的技术框架开发，基础功能完善，可基于Kubernetes + Docker实现Devops构建流程。
+前后端采用目前最流行的技术框架开发，基础功能完善，可基于Kubernetes + Docker + Jenkins 实现 Devops 构建流程。
 
 
 ## 项目图
@@ -43,7 +43,7 @@ admin/111111
 ## 快速开始
 
 open-admin 集成了 同步菜单、异步菜单，默认使用异步菜单，菜单数据由后端接口提供，如果系统不需要自定义菜单权限，可以改成同步菜单，菜单由前端配置。 修改方式 
-编辑 open-admin-front main.js 文件 将 initRouter 方法 第一个参数 改为 true 即可
+编辑 open-admin-front main.js 文件 将 `initRouter` 方法 第一个参数 改为 true 即可
 
 ### 本地开发
 
@@ -66,7 +66,7 @@ npm install
 npm run dev
 ```
 
-### Docker 私有镜像
+### docker 私有镜像
 
 open-admin 采用 `artifactory-jcr` 搭建私有仓库镜像，以下是artifactory-jcr docker方式安装命令
 ```bash
@@ -98,7 +98,7 @@ docker-compose -f open-admin-compose.yaml down
 
 ### 生产环境
 
-生产环境建议使用 `kubernetes` 方式部署，mysql 密码使用kubernetes secret 方式保存，可以通过 echo -n 'xxxxxxxxxxxxxxxx' | base64 生成， kubernetes.yaml 在 kubernetes 目录下，切换到该目录下 运行以下命令即可
+生产环境建议使用 `kubernetes` 方式部署，mysql 密码使用kubernetes secret 方式保存，可以通过 `echo -n 'xxxxxxxxxxxxxxxx' | base64` 生成， kubernetes.yaml 在 kubernetes 目录下，切换到该目录下 运行以下命令即可
 
 ```bash
 # 创建生产环境命令空间
