@@ -37,9 +37,9 @@ const loginIgnore = {
  * 初始化路由实例
  * @returns {VueRouter}
  */
-function initRouter(isAuth) {
+function initRouter(isSync, isAuth) {
   const options = {
-    routes: isAuth ? commonRoutes.concat(getRouters()) : commonRoutes,
+    routes: isSync ? require('./sync.config').default.routes : isAuth ? commonRoutes.concat(getRouters()) : commonRoutes,
   };
   formatRoutes(options.routes);
   return new Router(options);

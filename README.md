@@ -1,12 +1,6 @@
-项目背景:
-
-在当前互联网环境下，往往会遇到一些需要快速成型的项目，这些项目不可或缺的都离不开后台管理系统，这些管理系统通常都需要包含登录，RABC权限，日志，用户管理，Excel导出等通用的功能，前后端开发起来少则一周，多则几周。
-
-我们应该把更多的精力释放出来，更多的投入到业务中去，避免去开发重复性功能，去节约一些时间和成本，利用这些成本和时间去做更多有意义的事情。
-
 项目介绍:
 
-Open Admin是基于 Spring Boot + Spring Security + Mybatis + Vue Antd Admin Pro + Mysql开发的框架，致力于为用户生成定制的前后端脚手架框架，系统集成了RBAC, 菜单权限，日志管理，Excel导出, 国际化等常用功能，并且基于gitlab、jenkins、 Docker、 Kubernetes实现了Devops构建流程，使开发专注于业务逻辑。 能够有效降低开发成本，提升开发效率。
+Open Admin是基于 Spring Boot + Spring Security + Mybatis + Vue Antd Admin Pro + Mysql开发的框架，致力于为用户生成定制的前后端脚手架框架，系统集成了同步菜单、异步菜单、RBAC、 菜单权限、日志管理、Excel导出、国际化等常用功能，并且基于gitlab、jenkins、 Docker、 Kubernetes实现了Devops构建流程，使开发专注于业务逻辑。 能够有效降低开发成本，提升开发效率。
 
 Open Admin 的开发借鉴了很多优秀的开源项目，应用案例等等，并将他们纳入项目中，比如前端是基于·iczer / vue-antd-admin·开发，结合自己的思想和开发经验，对框架完成了一次重构。
 
@@ -49,7 +43,16 @@ admin  111111
 
 快速开始
 
-开发环境
+	同步菜单、异步菜单
+
+	main.js
+
+	异步菜单
+	const router = initRouter(false, checkAuthorization() ? true : false);
+
+	同步菜单
+	const router = initRouter(true，, checkAuthorization() ? true : false);
+
 
 	后端
 
