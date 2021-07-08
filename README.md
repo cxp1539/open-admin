@@ -66,7 +66,7 @@ npm install
 npm run dev
 ```
 
-### docker 私有镜像
+### docker 私有镜像使用
 
 open-admin 采用 `artifactory-jcr` 搭建私有仓库镜像，以下是artifactory-jcr docker方式安装命令
 ```bash
