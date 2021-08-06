@@ -140,7 +140,7 @@ docker restart gitlab
 
 ## 运维监控
 
-Kubernetes Dashboard 提供了在web页面上管理K8S，运维监控可以通过 Heapster+InfluxDB+Grafana 搭建监控平台，监控平台 yml 配置文件 heapster 目录下，切换到该目录下，运行以下命令 通过浏览器 `http://ip:30558` 访问即可
+Kubernetes Dashboard 提供了在web页面上管理K8S，运维监控可以通过 Heapster+InfluxDB+Grafana 搭建监控平台，监控平台 yml 配置文件 heapster 目录下，切换到该目录下，运行以下命令 通过浏览器 `http://ip:30558` 链接访问即可
 
 ```bash
 kubectl apply -f heapster/
